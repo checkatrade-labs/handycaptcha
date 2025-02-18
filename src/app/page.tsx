@@ -4,6 +4,7 @@ import { CaptchaChallenge } from '@/components/captcha/challenge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { CaptchaResponse } from '@/types/captcha';
+import { useState } from 'react';
 
 const features = [
   {
@@ -60,8 +61,11 @@ const pricingTiers = [
 ];
 
 export default function Home() {
+  const [isVerified, setIsVerified] = useState(false);
+
   const handleVerify = (response: CaptchaResponse) => {
     console.log('Verification response:', response);
+    setIsVerified(true);
   };
 
   return (
@@ -93,11 +97,27 @@ export default function Home() {
                 <Button size="lg" variant="outline">View Documentation</Button>
               </div>
             </div>
-            <div className="flex-1 flex justify-center">
-              <CaptchaChallenge
-                siteKey="demo"
-                onVerify={handleVerify}
-              />
+            <div className="flex-1 flex flex-col items-center">
+              <div className="demo-container w-full max-w-md">
+                <h3 className="text-3xl font-bold text-zinc-800 mb-2 text-center">Try it yourself!</h3>
+                <div className="h-px bg-zinc-200 w-full my-4"></div>
+                <p className="text-zinc-600 mb-6 text-center">
+                  This is a live demo - click the images to verify you&apos;re a home improvement expert!
+                  <span className="inline-block ml-2 animate-bounce">👇</span>
+                </p>
+                <CaptchaChallenge
+                  siteKey="demo"
+                  onVerify={handleVerify}
+                />
+                {isVerified && (
+                  <div className="flex items-center justify-center space-x-2 text-green-600 font-medium mt-6">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Verification successful!</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

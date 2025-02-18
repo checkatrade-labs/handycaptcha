@@ -70,3 +70,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(24, 24, 27, 0.1);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(24, 24, 27, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(24, 24, 27, 0);
+  }
+}
+
+.demo-container {
+  animation: pulse-glow 2s infinite;
+  background-color: rgba(244, 244, 245, 0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.demo-container:hover {
+  background-color: rgba(244, 244, 245, 0.8);
+}
