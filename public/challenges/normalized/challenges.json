@@ -1,0 +1,536 @@
+{
+  "version": "1.0.0",
+  "challenges": [
+    {
+      "id": "damp-4",
+      "type": "damp",
+      "question": "Find the damp",
+      "imageUrl": "/challenges/normalized/damp-4.webp",
+      "difficulty": "medium",
+      "regions": [
+        {
+          "shape": {
+            "name": "rect",
+            "x": 642,
+            "y": 105,
+            "width": 155,
+            "height": 254
+          },
+          "isCorrect": false,
+          "label": "That's a window. Not damp."
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              60,
+              255,
+              559,
+              613,
+              612,
+              560,
+              70
+            ],
+            "all_points_y": [
+              394,
+              360,
+              331,
+              356,
+              459,
+              450,
+              541
+            ]
+          },
+          "isCorrect": true,
+          "label": "That's damp!"
+        }
+      ]
+    },
+    {
+      "id": "damp-3",
+      "type": "damp",
+      "question": "Hmm, what could the problem area be?",
+      "imageUrl": "/challenges/normalized/damp-3.webp",
+      "difficulty": "easy",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              616,
+              446,
+              217,
+              313,
+              456,
+              541
+            ],
+            "all_points_y": [
+              131,
+              444,
+              428,
+              280,
+              149,
+              113
+            ]
+          },
+          "isCorrect": true,
+          "label": "Oh hey! That looks like damp!"
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              797,
+              681,
+              794
+            ],
+            "all_points_y": [
+              92,
+              58,
+              12
+            ]
+          },
+          "isCorrect": true,
+          "label": "Oh wow, I didn't even notice that! Well done!"
+        }
+      ]
+    },
+    {
+      "id": "damp-1",
+      "type": "damp",
+      "question": "Find the damp area",
+      "imageUrl": "/challenges/normalized/damp-1.webp",
+      "difficulty": "hard",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              557,
+              366,
+              361,
+              571
+            ],
+            "all_points_y": [
+              124,
+              228,
+              437,
+              216
+            ]
+          },
+          "isCorrect": true,
+          "label": "The damp is rising behind the wallpaper."
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              138,
+              162,
+              124,
+              95
+            ],
+            "all_points_y": [
+              368,
+              452,
+              474,
+              369
+            ]
+          },
+          "isCorrect": true,
+          "label": "Subtle, but yes, that's damp behind the wallpaper."
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              420,
+              422,
+              497,
+              481
+            ],
+            "all_points_y": [
+              62,
+              133,
+              113,
+              29
+            ]
+          },
+          "isCorrect": false,
+          "label": "That's a boing-y thing. Not damp."
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              599,
+              794,
+              794,
+              635
+            ],
+            "all_points_y": [
+              257,
+              324,
+              6,
+              8
+            ]
+          },
+          "isCorrect": false,
+          "label": "That's a door. Do you know what we're asking?"
+        }
+      ]
+    },
+    {
+      "id": "leak-5",
+      "type": "leak",
+      "question": "Where is the water coming from?",
+      "imageUrl": "/challenges/normalized/leak-5.webp",
+      "difficulty": "easy",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              423,
+              505,
+              505,
+              411
+            ],
+            "all_points_y": [
+              101,
+              98,
+              197,
+              197
+            ]
+          },
+          "isCorrect": true,
+          "label": "Spot on! That's a leak!"
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              379,
+              121,
+              162,
+              407,
+              441,
+              384
+            ],
+            "all_points_y": [
+              98,
+              350,
+              547,
+              518,
+              216,
+              214
+            ]
+          },
+          "isCorrect": true,
+          "label": "The water is a symptom of a leak!"
+        }
+      ]
+    },
+    {
+      "id": "leak-3",
+      "type": "leak",
+      "question": "I think there's a leak. But where?",
+      "imageUrl": "/challenges/normalized/leak-3.webp",
+      "difficulty": "medium",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              182,
+              181,
+              290,
+              284,
+              181
+            ],
+            "all_points_y": [
+              398,
+              542,
+              537,
+              361,
+              367
+            ]
+          },
+          "isCorrect": true,
+          "label": "There's the leak!"
+        },
+        {
+          "shape": {
+            "name": "rect",
+            "x": 430,
+            "y": 37,
+            "width": 366,
+            "height": 560
+          },
+          "isCorrect": false,
+          "label": "Although this is 70% water, it's not leaking."
+        }
+      ]
+    },
+    {
+      "id": "leak-2",
+      "type": "leak",
+      "question": "What is wet that should be dry?",
+      "imageUrl": "/challenges/normalized/leak-2.webp",
+      "difficulty": "easy",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              5,
+              794,
+              793,
+              251,
+              243,
+              143,
+              141,
+              8
+            ],
+            "all_points_y": [
+              6,
+              6,
+              594,
+              588,
+              456,
+              466,
+              584,
+              584
+            ]
+          },
+          "isCorrect": true,
+          "label": "That's right! Looks like there's a leak!"
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              148,
+              232,
+              246,
+              148
+            ],
+            "all_points_y": [
+              472,
+              466,
+              587,
+              588
+            ]
+          },
+          "isCorrect": false,
+          "label": "That's dry but should be wet."
+        }
+      ]
+    },
+    {
+      "id": "leak-1",
+      "type": "leak",
+      "question": "Find the leak",
+      "imageUrl": "/challenges/normalized/leak-1.webp",
+      "difficulty": "easy",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              339,
+              448,
+              419,
+              312
+            ],
+            "all_points_y": [
+              161,
+              209,
+              284,
+              232
+            ]
+          },
+          "isCorrect": true,
+          "label": "Spot on! There's a leak!"
+        }
+      ]
+    },
+    {
+      "id": "crack-5",
+      "type": "crack",
+      "question": "Where's the issue in this wall?",
+      "imageUrl": "/challenges/normalized/crack-5.webp",
+      "difficulty": "medium",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              612,
+              542,
+              379,
+              268,
+              288,
+              497,
+              632,
+              701
+            ],
+            "all_points_y": [
+              100,
+              228,
+              347,
+              359,
+              432,
+              402,
+              294,
+              109
+            ]
+          },
+          "isCorrect": true,
+          "label": "You found a crack in this wall!"
+        }
+      ]
+    },
+    {
+      "id": "crack3",
+      "type": "crack",
+      "question": "Where might the issues be?",
+      "imageUrl": "/challenges/normalized/crack3.webp",
+      "difficulty": "easy",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              225,
+              154,
+              8,
+              11,
+              162,
+              250,
+              255,
+              208,
+              272
+            ],
+            "all_points_y": [
+              97,
+              275,
+              282,
+              373,
+              370,
+              473,
+              414,
+              331,
+              142
+            ]
+          },
+          "isCorrect": true,
+          "label": "That's a huge crack!"
+        },
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              415,
+              459,
+              428,
+              467,
+              489,
+              620,
+              641,
+              793,
+              791,
+              599
+            ],
+            "all_points_y": [
+              203,
+              317,
+              405,
+              453,
+              347,
+              399,
+              333,
+              368,
+              283,
+              240
+            ]
+          },
+          "isCorrect": true,
+          "label": "That's a lot of cracks!"
+        }
+      ]
+    },
+    {
+      "id": "crack-2",
+      "type": "crack",
+      "question": "Find the issue",
+      "imageUrl": "/challenges/normalized/crack-2.webp",
+      "difficulty": "medium",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              233,
+              373,
+              468,
+              481,
+              490,
+              560,
+              557,
+              429,
+              378
+            ],
+            "all_points_y": [
+              125,
+              368,
+              403,
+              550,
+              597,
+              596,
+              331,
+              213,
+              113
+            ]
+          },
+          "isCorrect": true,
+          "label": "Correct. There shouldn't be gaps there"
+        }
+      ]
+    },
+    {
+      "id": "crack-1",
+      "type": "crack",
+      "question": "Find the crack",
+      "imageUrl": "/challenges/normalized/crack-1.webp",
+      "difficulty": "hard",
+      "regions": [
+        {
+          "shape": {
+            "name": "polygon",
+            "all_points_x": [
+              117,
+              416,
+              697,
+              708,
+              567,
+              375,
+              165
+            ],
+            "all_points_y": [
+              215,
+              373,
+              495,
+              429,
+              313,
+              265,
+              166
+            ]
+          },
+          "isCorrect": true,
+          "label": "Looks like a crack."
+        }
+      ]
+    }
+  ]
+}
