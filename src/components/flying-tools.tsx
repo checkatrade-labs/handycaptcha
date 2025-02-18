@@ -15,9 +15,9 @@ interface Tool {
 }
 
 const TOOL_TYPES = ['🔧', '🔨', '⚡', '🪛', '⛏️', '🪜', '🧰', '🔌'];
-const NUM_TOOLS = 12;
+const NUM_TOOLS = 16;
 const VELOCITY_RANGE = 0.8; // pixels per frame
-const ROTATION_SPEED_RANGE = 0.8; // degrees per frame
+const ROTATION_SPEED_RANGE = 0.4; // degrees per frame
 
 export function FlyingTools() {
   const [tools, setTools] = useState<Tool[]>([]);
@@ -37,7 +37,7 @@ export function FlyingTools() {
       velocityX: (Math.random() - 0.5) * VELOCITY_RANGE,
       velocityY: (Math.random() - 0.5) * VELOCITY_RANGE,
       rotationSpeed: (Math.random() - 0.5) * ROTATION_SPEED_RANGE,
-      scale: 0.8 + Math.random() * 0.4, // Random scale between 0.8 and 1.2
+      scale: 0.7 + Math.random() * 2, // Random scale between 0.9 and 1.2
       type: TOOL_TYPES[Math.floor(Math.random() * TOOL_TYPES.length)],
     }));
 
@@ -118,8 +118,8 @@ export function FlyingTools() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none overflow-hidden"
-      style={{ zIndex: 0 }}
+      className="absolute inset-0 pointer-events-none overflow-hidden"
+      style={{ zIndex: 0, opacity: 0.9 }}
     >
       {tools.map(tool => (
         <div
