@@ -223,16 +223,39 @@ body {
   }
 }
 
+/* Z-index hierarchy */
+header {
+  position: relative;
+  z-index: 20;
+}
+
+nav {
+  position: relative;
+  z-index: 20;
+}
+
 .demo-container {
   animation: pulse-glow 2s infinite;
   background-color: rgba(244, 244, 245, 0.5);
   border-radius: 1rem;
   padding: 2rem;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 20;
+}
+
+.tooltip {
+  z-index: 30;
 }
 
 .dark .demo-container {
   background-color: rgba(39, 39, 42, 0.5);
+}
+
+/* Ensure buttons and links stay on top */
+button, a {
+  position: relative;
+  z-index: 20;
 }
 
 .demo-container:hover {
@@ -283,9 +306,10 @@ body {
 
 .flying-tool {
   will-change: transform;
-  transition: transform 0.1s linear;
+  transition: all 0.2s ease-out;
   opacity: 0.15;
   mix-blend-mode: multiply;
+  cursor: pointer;
 }
 
 .dark .flying-tool {
@@ -294,13 +318,32 @@ body {
   mix-blend-mode: screen;
 }
 
-/* Increase tool size on hover for fun interaction */
+/* Hover effect */
 .flying-tool:hover {
   transform: scale(1.2);
   opacity: 0.4;
   transition: all 0.3s ease;
+  filter: brightness(1.2);
 }
 
 .dark .flying-tool:hover {
   opacity: 0.5;
+}
+
+/* Click animation */
+.tool-clicked {
+  animation: toolPop 0.5s cubic-bezier(0.36, 0, 0.66, 1.5);
+  opacity: 0.8 !important;
+  z-index: 1;
+}
+
+@keyframes toolPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.dark .tool-clicked {
+  opacity: 0.7 !important;
+  filter: brightness(1.5);
 }
