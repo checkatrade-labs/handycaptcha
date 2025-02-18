@@ -222,7 +222,7 @@ export default function Home() {
               <p className="text-zinc-500 dark:text-zinc-400 italic">
                 Note: This is a fun concept/demo project showcasing what a home improvement-themed CAPTCHA service could look like.
               </p>
-              <div className="space-x-4">
+              <div className="space-x-4 relative z-25">
                 <a href="https://handycaptcha.com/signup" target="_blank" rel="noopener noreferrer">
                   <Button size="lg">Get Started</Button>
                 </a>
