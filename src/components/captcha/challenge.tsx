@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Challenge, CaptchaProps, CaptchaResponse } from '@/types/captcha';
 import { getChallengeTypeConfig } from '@/config/challenge-types';
 import { cn } from '@/lib/utils';
-
+import { useTheme } from '@/components/providers';
 
 // Helper functions for hit detection
 function isPointInPolygon(
@@ -66,11 +66,11 @@ const loadChallenges = async (): Promise<Challenge[]> => {
 
 export function CaptchaChallenge({
   siteKey,
-  theme = 'light',
   onVerify,
   onError,
   debug = false,
-}: CaptchaProps & { debug?: boolean }): React.ReactElement {
+}: Omit<CaptchaProps, 'theme'> & { debug?: boolean }): React.ReactElement {
+  const { theme } = useTheme();
   // In a real implementation, we would use siteKey to fetch site-specific challenges
   // Fisher-Yates shuffle algorithm
   const shuffleArray = <T,>(array: T[]): T[] => {
@@ -266,20 +266,20 @@ export function CaptchaChallenge({
     }
   };
 
-
   return (
-    <Card className={cn('w-[400px] p-4 relative', theme === 'dark' && 'bg-zinc-900 text-white')}>
+    <Card className={cn('w-[400px] p-4 relative', theme === 'dark' && 'bg-zinc-900 text-white border-zinc-800')}>
       <div className="space-y-4">
         <div className="text-sm font-medium flex items-center gap-2">
           {getChallengeTypeConfig(currentChallenge.type).icon}
-          {currentChallenge.question}
+          <span className="dark:text-zinc-100">{currentChallenge.question}</span>
         </div>
         
         <div 
           className={cn(
             "relative w-full h-[300px] border rounded-lg overflow-hidden transition-all",
             `cursor-${getChallengeTypeConfig(currentChallenge.type).cursor}`,
-            isComplete && "pointer-events-none"
+            isComplete && "pointer-events-none",
+            theme === 'dark' && "border-zinc-800"
           )}
           onClick={!isComplete ? handleImageClick : undefined}
         >
@@ -346,7 +346,7 @@ export function CaptchaChallenge({
               {isVerifying ? (
                 <>
                   <span className="animate-spin">🔨</span>
-                  {loadingMessage}
+                  <span className="dark:text-zinc-100">{loadingMessage}</span>
                 </>
               ) : (
                 'Verify'
@@ -358,12 +358,14 @@ export function CaptchaChallenge({
       {(failureMessage || successMessage) && (
         <div className={cn(
           "absolute top-2 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full text-sm",
-          failureMessage ? "bg-red-100 text-red-800 animate-bounce" : "bg-green-100 text-green-800"
+          failureMessage 
+            ? "bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200 animate-bounce" 
+            : "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200"
         )}>
           {failureMessage || successMessage}
         </div>
       )}
-      <div className="mt-2 text-xs text-center text-gray-500 italic">
+      <div className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400 italic">
         No contractors were harmed in this verification process
       </div>
     </Card>

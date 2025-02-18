@@ -2,6 +2,8 @@
 
 > The first CAPTCHA service designed specifically for the home improvement industry. Verify users while showcasing your expertise.
 
+**Note: This is a fun concept/demo project showcasing what a home improvement-themed CAPTCHA service could look like. While the demo is functional, this is not a production service. Feel free to explore the code and try it out!**
+
 ## Overview
 
 HandyCAPTCHA is a unique CAPTCHA service that replaces traditional text recognition with home improvement challenges. Users verify their humanity by identifying common household issues like leaking taps, cracked brickwork, or faulty electrical installations.
@@ -74,6 +76,14 @@ HandyCAPTCHA is a unique CAPTCHA service that replaces traditional text recognit
 ### API Structure
 
 ```typescript
+interface CaptchaProps {
+  siteKey: string;
+  theme?: 'light' | 'dark';
+  onVerify?: (response: CaptchaResponse) => void;
+  onError?: (error: Error) => void;
+  debug?: boolean;
+}
+
 interface CaptchaResponse {
   success: boolean;
   score: number;
@@ -82,10 +92,13 @@ interface CaptchaResponse {
   error_codes?: string[];
 }
 
-interface CaptchaRequest {
-  site_key: string;
-  challenge_id: string;
-  response: string;
+interface Challenge {
+  id: string;
+  type: string;
+  question: string;
+  imageUrl: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  regions: ChallengeRegion[];
 }
 ```
 
@@ -135,10 +148,10 @@ interface CaptchaRequest {
 
 ```javascript
 // Install
-npm install @HandyCAPTCHA/react
+npm install handycaptcha
 
 // Use in your React component
-import { HandyCAPTCHA } from '@HandyCAPTCHA/react';
+import { HandyCAPTCHA } from 'handycaptcha';
 
 function ContactForm() {
   const onVerify = (response) => {
@@ -148,7 +161,7 @@ function ContactForm() {
   return (
     <HandyCAPTCHA
       siteKey="your_site_key"
-      theme="plumbing"
+      theme="light"
       onVerify={onVerify}
     />
   );
@@ -157,7 +170,7 @@ function ContactForm() {
 
 ## Getting Started
 
-1. Sign up at [HandyCAPTCHA.dev](https://HandyCAPTCHA.dev)
+1. Sign up at [handycaptcha.com](https://handycaptcha.com/signup)
 2. Create a new site and get your API keys
 3. Choose your integration method
 4. Add the widget to your site
@@ -173,13 +186,14 @@ function ContactForm() {
 
 ## Support
 
-- Documentation: [docs.HandyCAPTCHA.dev](https://docs.HandyCAPTCHA.dev)
-- Email: support@HandyCAPTCHA.dev
-- GitHub Issues: [Report bugs](https://github.com/HandyCAPTCHA/HandyCAPTCHA/issues)
+- Documentation: [handycaptcha.com/docs](https://handycaptcha.com/docs)
+- Support: [handycaptcha.com/help](https://handycaptcha.com/help)
+- Status: [handycaptcha.com/status](https://handycaptcha.com/status)
+- Email: james.pain@checkatrade.com
 
 ## Contributing
 
-We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions! Check out our issues on [GitHub](https://github.com/checkatrade-labs/handycaptcha/issues).
 
 ## License
 

@@ -4,6 +4,146 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+}
+
+/* Parallax base styles */
+.parallax-container {
+  perspective: 1000px;
+  overflow-x: hidden;
+}
+
+.parallax-layer {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* Tool chase animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.floating-tool {
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  transition: all 0.3s ease-out;
+  animation: float 3s infinite;
+}
+
+/* Pricing card hover effect */
+@keyframes cardPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1.02); }
+}
+
+.pricing-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-card:hover {
+  animation: cardPop 0.3s ease-out forwards;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Checkmark animation */
+@keyframes checkmark {
+  0% { 
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-check {
+  animation: checkmark 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Tool divider */
+.tool-divider {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+}
+
+.tool-divider::before {
+  content: '🔧';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  background: #fff;
+  padding: 0 10px;
+}
+
+/* Confetti animation */
+@keyframes confettiFall {
+  0% { transform: translateY(-100%) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+.confetti {
+  position: fixed;
+  animation: confettiFall 1.5s linear forwards;
+}
+
+/* Dark mode toggle animation */
+@keyframes hardHatFlip {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(180deg); }
+}
+
+.dark-mode-toggle {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.dark-mode-toggle.flipped {
+  animation: hardHatFlip 0.6s ease-out forwards;
+}
+
+
+/* Easter egg animations */
+@keyframes toolRain {
+  0% { transform: translateY(-100vh) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+.raining-tool {
+  position: fixed;
+  animation: toolRain 2s linear forwards;
+}
+
+/* Secret constructor mode */
+.constructor-mode {
+  position: relative;
+  overflow: hidden;
+}
+
+.constructor-mode::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  pointer-events: none;
+  opacity: 0.1;
 }
 
 @layer base {
@@ -91,6 +231,76 @@ body {
   transition: all 0.3s ease;
 }
 
+.dark .demo-container {
+  background-color: rgba(39, 39, 42, 0.5);
+}
+
 .demo-container:hover {
   background-color: rgba(244, 244, 245, 0.8);
+}
+
+.dark .demo-container:hover {
+  background-color: rgba(39, 39, 42, 0.8);
+}
+
+/* Dark mode text colors */
+.dark .text-zinc-600 {
+  color: rgba(161, 161, 170, 1);
+}
+
+.dark .text-zinc-800 {
+  color: rgba(244, 244, 245, 1);
+}
+
+/* Dark mode tool divider */
+.dark .tool-divider {
+  background: linear-gradient(90deg, transparent, rgba(244, 244, 245, 0.1), transparent);
+}
+
+.dark .tool-divider::before {
+  background: rgb(24, 24, 27);
+}
+
+/* Dark mode pricing cards */
+.dark .pricing-card {
+  background-color: rgba(39, 39, 42, 0.3);
+  border-color: rgba(63, 63, 70, 0.4);
+}
+
+.dark .pricing-card:hover {
+  background-color: rgba(39, 39, 42, 0.5);
+}
+
+/* Flying Tools Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+.flying-tool {
+  will-change: transform;
+  transition: transform 0.1s linear;
+  opacity: 0.15;
+  mix-blend-mode: multiply;
+}
+
+.dark .flying-tool {
+  filter: brightness(1.2);
+  opacity: 0.2;
+  mix-blend-mode: screen;
+}
+
+/* Increase tool size on hover for fun interaction */
+.flying-tool:hover {
+  transform: scale(1.2);
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.dark .flying-tool:hover {
+  opacity: 0.5;
 }
