@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import confetti from 'canvas-confetti';
 
 interface Tool {
   id: number;
@@ -13,15 +12,13 @@ interface Tool {
   rotationSpeed: number;
   scale: number;
   type: string;
-  isAnimating?: boolean;
+  isNew?: boolean;
 }
 
 const TOOL_TYPES = ['🔧', '🔨', '⚡', '🪛', '⛏️', '🪜', '🧰', '🔌'];
 const NUM_TOOLS = 16;
 const VELOCITY_RANGE = 0.4; // pixels per frame
 const ROTATION_SPEED_RANGE = 0.4; // degrees per frame
-const CLICK_BOOST = 8; // Velocity multiplier when clicked
-const INFLUENCE_RADIUS = 1000; // Radius in pixels for affecting nearby tools
 
 export function FlyingTools() {
   const [tools, setTools] = useState<Tool[]>([]);
@@ -50,69 +47,45 @@ export function FlyingTools() {
 
   // Handle tool click
   const handleToolClick = (clickedTool: Tool, event: React.MouseEvent) => {
-    // Prevent event from bubbling up
     event.stopPropagation();
 
-    // Create confetti at click position
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (rect) {
-      const x = (event.clientX - rect.left) / rect.width;
-      const y = (event.clientY - rect.top) / rect.height;
-      confetti({
-        particleCount: 15,
-        spread: 40,
-        origin: { x, y },
-        colors: ['#FFD700', '#C0C0C0', '#B87333'], // Gold, Silver, Copper
-      });
-    }
+    // Calculate split velocities (3x normal speed)
+    const splitSpeed = VELOCITY_RANGE * 3;
+    const angles = [-45, 45]; // Diagonal directions in degrees
 
-    setTools(prevTools =>
-      prevTools.map(tool => {
-        if (tool.id === clickedTool.id) {
-          // Boost the clicked tool
-          return {
-            ...tool,
-            isAnimating: true,
-            velocityX: tool.velocityX * CLICK_BOOST,
-            velocityY: tool.velocityY * CLICK_BOOST,
-            rotationSpeed: -tool.rotationSpeed * 2, // Reverse and speed up rotation
-          };
-        }
+    const splitTools = angles.map((angle, index) => {
+      const radians = (angle * Math.PI) / 180;
+      return {
+        ...clickedTool,
+        id: Date.now() + index, // Ensure unique IDs
+        x: clickedTool.x,
+        y: clickedTool.y,
+        scale: clickedTool.scale * 0.4,
+        velocityX: Math.cos(radians) * splitSpeed,
+        velocityY: Math.sin(radians) * splitSpeed,
+        isNew: true,
+      };
+    });
 
-        // Affect nearby tools
-        const dx = tool.x - clickedTool.x;
-        const dy = tool.y - clickedTool.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    setTools(prevTools => [
+      ...prevTools.filter(tool => tool.id !== clickedTool.id),
+      ...splitTools,
+    ]);
 
-        if (distance < INFLUENCE_RADIUS) {
-          const influence = (INFLUENCE_RADIUS - distance) / INFLUENCE_RADIUS;
-          return {
-            ...tool,
-            velocityX: tool.velocityX + (dx / distance) * influence,
-            velocityY: tool.velocityY + (dy / distance) * influence,
-          };
-        }
-
-        return tool;
-      })
-    );
-
-    // Reset animation state after a delay
+    // Start growing animation after a short delay
     setTimeout(() => {
       setTools(prevTools =>
         prevTools.map(tool =>
-          tool.id === clickedTool.id
+          tool.isNew
             ? {
                 ...tool,
-                isAnimating: false,
-                velocityX: tool.velocityX / CLICK_BOOST,
-                velocityY: tool.velocityY / CLICK_BOOST,
-                rotationSpeed: -tool.rotationSpeed / 2,
+                scale: tool.scale * 2.5,
+                isNew: false,
               }
             : tool
         )
       );
-    }, 500);
+    }, 100);
   };
 
   // Animation loop
@@ -195,14 +168,13 @@ export function FlyingTools() {
       {tools.map(tool => (
         <div
           key={tool.id}
-          className={`absolute select-none flying-tool cursor-pointer ${
-            tool.isAnimating ? 'tool-clicked' : ''
-          }`}
+          className="absolute select-none flying-tool cursor-pointer"
           style={{
             left: `${tool.x}px`,
             top: `${tool.y}px`,
             transform: `rotate(${tool.rotation}deg) scale(${tool.scale})`,
             fontSize: '28px',
+            transition: 'transform 1s ease-out',
           }}
           onClick={(e) => handleToolClick(tool, e)}
         >

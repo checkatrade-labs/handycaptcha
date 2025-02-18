@@ -9,6 +9,7 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useTheme } from '@/components/providers';
 import confetti from 'canvas-confetti';
+import Prism from 'prismjs';
 
 // Easter egg sequences
 const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -102,6 +103,11 @@ export default function Home() {
   const [isConstructorMode, setIsConstructorMode] = useState(false);
   const [keySequence, setKeySequence] = useState<string[]>([]);
   const logoClickCount = useRef(0);
+
+  // Initialize Prism.js syntax highlighting
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   // Handle verification success with confetti
   const handleVerify = (response: CaptchaResponse) => {
@@ -316,9 +322,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 dark:text-zinc-100">{SECTION_HEADERS.integration}</h2>
           <div className="max-w-2xl mx-auto">
-            <Card className="p-6 font-mono text-sm dark:bg-zinc-900/50">
+            <Card className="code-block">
               <pre className="language-javascript">
-                {`// Install
+                <code className="language-javascript">
+                  {`// Install
 npm install handycaptcha
 
 // Use in your React component
@@ -337,6 +344,7 @@ function ContactForm() {
     />
   );
 }`}
+                </code>
               </pre>
             </Card>
           </div>

@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Code block styling */
+.code-block {
+  @apply overflow-x-auto;
+  max-width: 100%;
+}
+
+.code-block pre {
+  @apply p-4 rounded-lg bg-zinc-50 dark:bg-zinc-800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Prism.js theme customization */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-zinc-500 dark:text-zinc-400;
+}
+
+.token.function {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.token.keyword {
+  @apply text-purple-600 dark:text-purple-400;
+}
+
+.token.string {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.token.number,
+.token.boolean {
+  @apply text-orange-600 dark:text-orange-400;
+}
+
+.token.operator,
+.token.punctuation {
+  @apply text-zinc-600 dark:text-zinc-300;
+}
+
+.token.property,
+.token.parameter {
+  @apply text-red-600 dark:text-red-400;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
