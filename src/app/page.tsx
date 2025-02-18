@@ -1,100 +1,220 @@
-import Image from "next/image";
+"use client";
+
+import { CaptchaChallenge } from '@/components/captcha/challenge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { CaptchaResponse } from '@/types/captcha';
+
+const features = [
+  {
+    title: 'Plumbing Verification',
+    description: 'Users identify leaking taps, incorrect pipe installations, and water damage signs.',
+  },
+  {
+    title: 'Construction Challenges',
+    description: 'Find cracks in brickwork, identify structural issues, and spot unsafe scaffolding.',
+  },
+  {
+    title: 'Electrical Safety',
+    description: 'Identify faulty sockets, spot dangerous wiring, and recognize overloaded circuits.',
+  },
+  {
+    title: 'General Maintenance',
+    description: 'Find signs of damp, identify roof damage, and spot uneven flooring.',
+  },
+];
+
+const pricingTiers = [
+  {
+    name: 'Free',
+    price: '£0',
+    features: [
+      '1,000 verifications/month',
+      'Basic reporting',
+      'Standard themes',
+      'Community support',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '£29',
+    features: [
+      '10,000 verifications/month',
+      'Advanced analytics',
+      'Custom branding',
+      'Priority support',
+      'API access',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    features: [
+      'Unlimited verifications',
+      'Custom challenge types',
+      'Dedicated support',
+      'SLA guarantee',
+      'Self-hosting options',
+    ],
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const handleVerify = (response: CaptchaResponse) => {
+    console.log('Verification response:', response);
+  };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Header */}
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">HandyCAPTCHA</h1>
+          <nav className="space-x-4">
+            <Button variant="ghost">Documentation</Button>
+            <Button variant="ghost">Sign In</Button>
+            <Button>Get Started</Button>
+          </nav>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 bg-zinc-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1 space-y-6">
+              <h2 className="text-5xl font-bold">Secure your forms with home improvement challenges</h2>
+              <p className="text-xl text-zinc-600">
+                The first CAPTCHA service designed specifically for the home improvement industry.
+                Verify users while showcasing your expertise.
+              </p>
+              <div className="space-x-4">
+                <Button size="lg">Get Started</Button>
+                <Button size="lg" variant="outline">View Documentation</Button>
+              </div>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <CaptchaChallenge
+                siteKey="demo"
+                onVerify={handleVerify}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature) => (
+              <Card key={feature.title} className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-zinc-600">{feature.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 bg-zinc-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Pricing</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {pricingTiers.map((tier) => (
+              <Card key={tier.name} className="p-6">
+                <h3 className="text-2xl font-semibold mb-2">{tier.name}</h3>
+                <p className="text-4xl font-bold mb-6">{tier.price}</p>
+                <ul className="space-y-3 mb-6">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex items-center">
+                      <span className="mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Button className="w-full">
+                  {tier.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Integration Example */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Simple Integration</h2>
+          <div className="max-w-2xl mx-auto">
+            <Card className="p-6 font-mono text-sm">
+              <pre className="language-javascript">
+                {`// Install
+npm install @handycaptcha/react
+
+// Use in your React component
+import { HandyCAPTCHA } from '@handycaptcha/react';
+
+function ContactForm() {
+  const onVerify = (response) => {
+    console.log('Verification successful:', response);
+  };
+
+  return (
+    <HandyCAPTCHA
+      siteKey="your_site_key"
+      theme="plumbing"
+      onVerify={onVerify}
+    />
+  );
+}`}
+              </pre>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-auto border-t py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-2">
+                <li>Features</li>
+                <li>Pricing</li>
+                <li>Documentation</li>
+                <li>API Reference</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2">
+                <li>About</li>
+                <li>Contact</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2">
+                <li>Privacy</li>
+                <li>Terms</li>
+                <li>Security</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Connect</h4>
+              <ul className="space-y-2">
+                <li>GitHub</li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-12 text-center text-zinc-600">
+            © 2025 HandyCAPTCHA. All rights reserved.
+          </div>
+        </div>
       </footer>
     </div>
   );
